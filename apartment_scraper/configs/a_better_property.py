@@ -1,5 +1,5 @@
-from apartment_scraper.lib import Config
-from apartment_scraper.handlers import Appfolio
+from apartment_scraper.lib.config import Config
+from apartment_scraper.handlers.appfolio import Appfolio
 
 class ABetterPropertyConfig(Config):
     handler = Appfolio
@@ -7,16 +7,14 @@ class ABetterPropertyConfig(Config):
     company_url = "https://www.abetterproperty.com/"
     listings_url = "https://abetterproperty.appfolio.com/listings"
 
-    def filter_price(self, listings, price):
-        pass
+    def filter_price(self, listings):
+        return listings
 
     def filter_cheap_two_bedroom(self, listings):
-        pass
+        return listings
 
     def filter_one_bedroom(self, listings):
-        pass
+        return listings
 
     def filter_zip_code(self, listings):
-        pass
-
-configs = [ABetterPropertyConfig()]
+        return listings

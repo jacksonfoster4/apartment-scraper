@@ -1,2 +1,5 @@
 apartment-scraper
 *.swp
+apartment_scraper_env
+*.csv
+*.cfg

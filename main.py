@@ -1,4 +1,5 @@
-from apartment_scraper.config import configs
+from apartment_scraper.configs import configs 
+
 
 def main(*args, **kwargs):
     results = []
@@ -7,6 +8,8 @@ def main(*args, **kwargs):
         company = handler.run()
         if company.new_listings:
             results.push(company)
+        else:
+            print('no new results')
 
     if results:
         return send_results(results)

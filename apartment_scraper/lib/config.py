@@ -27,7 +27,7 @@ class Config:
         for name in dir(self):
             if name.startswith("filter_"):
                _filter = getattr(self, name)
-                filters.push(_filter)
+               filters.append(_filter)
         return filters
 
     def apply_filters(self, listings):
@@ -35,6 +35,7 @@ class Config:
         filtered_listings = listings
         for _filter in filters:
             filtered = _filter(listings)
-            filtered_listings.push(*filtered)
+            if len(filtered):
+                filtered_listings.append(*filtered)
 
         return filtered_listings
