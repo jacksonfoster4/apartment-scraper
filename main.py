@@ -1,4 +1,5 @@
 from apartment_scraper.configs import configs 
+from apartment_scraper.lib.send_results import send_results
 
 
 def main(*args, **kwargs):
@@ -7,11 +8,15 @@ def main(*args, **kwargs):
         handler = config.load_handler()
         company = handler.run()
         if company.new_listings:
-            results.push(company)
+            results.append(company)
         else:
             print('no new results')
 
     if results:
+        for company in results:
+            for l in company.new_listings:
+                print(f"{company.name}: {l.address}-{l.price}")
+
         return send_results(results)
 
 if __name__ == "__main__":

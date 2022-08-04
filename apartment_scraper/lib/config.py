@@ -32,10 +32,11 @@ class Config:
 
     def apply_filters(self, listings):
         filters = self.load_filters()
-        filtered_listings = listings
+        filtered_listings = set(listings)
         for _filter in filters:
             filtered = _filter(listings)
             if len(filtered):
-                filtered_listings.append(*filtered)
+                for el in filtered:
+                    filtered_listings.add(el)
 
         return filtered_listings

@@ -22,14 +22,15 @@ class Handler(ABC):
         return 'scrape_listings'
 
     def get_new_listings(self, listings_csv):
-        reader = csv.DictReader(listings_csv)
-        addresses = list(map( lambda listing: listing, self.company.listings))
+        reader = csv.DictReader(listings_csv, delimiter=',')
+        addresses = list(map( lambda listing: listing.address, self.company.listings))
 
         for r in reader:
             if r['address'] in addresses:
-                addresses.remove(reader['address'])
+                addresses.remove(r['address'])
 
         addresses = list(filter(lambda listing: listing.address in addresses, self.company.listings))
+
         return addresses
 
     def get_csv_name(self):
