@@ -35,7 +35,7 @@ class Handler(ABC):
 
     def get_csv_name(self):
         csv_name = self.config.company_name.lower().replace(" ", "-")
-        csv_name = f"{csv_name}-listings.csv"
+        csv_name = f"listings/{csv_name}-listings.csv"
         return csv_name
 
     def get_csv(self):
@@ -48,7 +48,7 @@ class Handler(ABC):
     
     def write_csv(self, listings, return_as='close'):
         header = ['address', 'price', 'beds', 'square_footage', 'available', 'link', 'image_url' ]
-        f = open(self.get_csv_name(), 'w')
+        f = open(self.get_csv_name(), 'w+')
         writer = csv.writer(f)
         writer.writerow(header)
 
@@ -65,6 +65,7 @@ class Handler(ABC):
         if return_as == 'r':
             f.close()
             f = open(self.get_csv_name(), 'r')
+            return f
         
         
 
